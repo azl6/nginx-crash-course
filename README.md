@@ -82,3 +82,27 @@ Isso significa que:
 - Ao acessarmos **\<IP>:8080**, seremos direcionados para o **index.html** da pasta **/tmp**
 - Ao acessarmos **\<IP>:8080/fruits**, seremos direcionados para o **index.html** da pasta **/tmp/fruits**, porque o que for passado na URL vai ser concatenado ao "root"
 
+# Usando aliases
+
+Os aliases são úteis quando queremos usar o mesmo **index.html** para dois caminhos diferentes.
+
+```nginx
+http {
+	server {
+		listen 8080;
+		root /tmp;
+
+		location /fruits {
+			root /tmp; 
+		}
+		
+		location /carbs {
+			alias /tmp/fruits # Acessar <IP>:8080/fruits e <IP>:8080/carbs resultará no mesmo
+		}
+
+	}
+}
+
+events {}
+```
+
