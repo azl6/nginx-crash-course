@@ -58,4 +58,27 @@ O arquivo `/etc/nginx/mime.types` possui uma associação entre o **Content-Type
 
 ![image](https://user-images.githubusercontent.com/80921933/224104779-fb457cc5-e4f3-416d-9bbc-1567b31ad2a5.png)
 
+# Servindo conteúdo de subpastas com o bloco location
+
+Também é possível servir conteúdo de subpastas, com a seguinte configuração:
+
+```nginx
+http {
+	server {
+		listen 8080;
+		root /tmp;
+
+		location /fruits {
+			root /tmp; # /fruits será concatenado, e portanto, buscará o index.html de /tmp/fruits/
+		}
+
+	}
+}
+
+events {}
+```
+
+Isso significa que:
+- Ao acessarmos **\<IP>:8080**, seremos direcionados para o **index.html** da pasta **/tmp**
+- Ao acessarmos **\<IP>:8080/fruits**, seremos direcionados para o **index.html** da pasta **/tmp/fruits**, porque o que for passado na URL vai ser concatenado ao "root"
 
