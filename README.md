@@ -28,8 +28,8 @@ Podemos redefinir o arquivo **nginx.conf** para ter as seguintes configurações
 ```nginx
 http {
 	server {
-		listen 8080; ############# Quando o usuário acessar <IP>/8080, será redirecionado para o index.html localizado |
-		root /tmp; <------------------------------------------------------------------------------------ nessa pasta ---
+		listen 8080; ############# Ao acessar <IP>/8080, seremos redirecionados para o index.html localizado |
+		root /tmp; # <-------------------------------------------------------------------------- nessa pasta -
 	}
 
 	server {
