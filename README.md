@@ -106,3 +106,25 @@ http {
 events {}
 ```
 
+# Especificando nomes de arquivos divergentes de index html
+
+Por padrão, o NGINX busca por arquivos chamados de **index.html**. Caso desejemos usar outro nome, por exemplo, **oitentaoitenta.html**, devemos configurar o `try_files`
+
+```nginx
+http {
+        server {
+                listen 8080;
+                root /tmp;
+		try_files /oitentaoitenta.html =404; # Buscará pelo /tmp/oitentaoitenta.html. 
+                                                     # Caso não encontre, lançará 404
+                location /fruits {
+                        root /tmp;
+                        try_files /fruits/oitentafruits.html =404; # Buscará pelo /tmp/fruits/oitentafruits.html. 
+                }                                                  # Caso não encontre, lançará 404
+
+        }
+}
+
+events {}
+```
+
