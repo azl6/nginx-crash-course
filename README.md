@@ -54,7 +54,7 @@ http {
 }
 ```
 
-O arquivo `/etc/nginx/mime.types` possui uma associação entre o Content-Type e a extensão de arquivos, para que diferentes extensões sejam servidos com o Content-Type correto:
+O arquivo `/etc/nginx/mime.types` possui uma associação entre o **Content-Type** e a **extensão de arquivos**, para que diferentes extensões sejam servidas com o Content-Type correto:
 
 ![image](https://user-images.githubusercontent.com/80921933/224104779-fb457cc5-e4f3-416d-9bbc-1567b31ad2a5.png)
 
