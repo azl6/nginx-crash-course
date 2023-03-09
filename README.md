@@ -41,3 +41,21 @@ http {
 events {} #################### Esse bloco é necessário, não sei o porquê.
 ```
 
+# Garantindo que diferentes arquivos serão servidos com o Content Type correto
+
+Para que o NGINX entregue o diferentes extensões de arquivos com o Content-Type adequado, devemos incluir a seguinte linha em nosso bloco `http`
+
+```nginx
+
+http {
+	include /etc/nginx/mime.types
+	
+	# ...
+}
+```
+
+O arquivo `/etc/nginx/mime.types` possui uma associação entre o Content-Type e a extensão de arquivos, para que diferentes extensões sejam servidos com o Content-Type correto:
+
+![image](https://user-images.githubusercontent.com/80921933/224104779-fb457cc5-e4f3-416d-9bbc-1567b31ad2a5.png)
+
+
