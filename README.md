@@ -25,7 +25,7 @@ Iremos criar um arquivo HTML simples, em $HOME/index.html
 
 Podemos redefinir o arquivo **nginx.conf** para ter as seguintes configurações:
 
-```
+```nginx
 http {
 	server {
 		listen 8080; ############# Quando o usuário acessar <IP>/8080, será redirecionado para o index.html localizado |
