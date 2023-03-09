@@ -150,3 +150,64 @@ http {
 
 events {}
 ```
+# Aplicando round robin para load balancing com o NGINX
+
+Para esse exemplo, upei 4 contêineres nas portas 1111, 2222, 3333 e 4444 com a imagem **dockersamples/static-site**
+
+Primeiro, declaramos nossos servidores no bloco `upstream`
+
+```nginx
+        upstream servers {
+                server 127.0.0.1:1111;
+                server 127.0.0.1:2222;
+                server 127.0.0.1:3333;
+                server 127.0.0.1:4444;
+        }
+```
+
+Depois, basta criarmos um bloco `location`, passando **/** como parâmetro, e definirmos o proxy_pass, apontando para o nome do nosso bloco upstream
+
+```nginx
+location / {
+	proxy_pass http://servers/;
+}
+
+```
+
+No final, nosso arquivo de configuração ficará asssim:
+
+```nginx
+http {
+
+        upstream servers {
+                server 127.0.0.1:1111;
+                server 127.0.0.1:2222;
+                server 127.0.0.1:3333;
+                server 127.0.0.1:4444;
+        }
+
+        server {
+                listen 8080;
+
+        location / {
+                proxy_pass http://servers/;
+        }
+
+
+        }
+}
+
+events {}
+```
+
+No final, ao acessarmos `\<IP>:8080`, será feito um round-robin pelos servidores para que o load-balancing seja bem sucedido:
+
+![image](https://user-images.githubusercontent.com/80921933/224141943-0dcd78b3-bafb-43c8-9911-1a8282a16b05.png)
+
+![image](https://user-images.githubusercontent.com/80921933/224142001-c4481c7b-8c11-4de5-98b8-814927884fb5.png)
+
+![image](https://user-images.githubusercontent.com/80921933/224142070-62e91542-7af6-4823-b95f-61901d97458f.png)
+
+![image](https://user-images.githubusercontent.com/80921933/224142128-89cdead9-9870-4c74-b91b-c63000f670ee.png)
+
+
