@@ -128,3 +128,25 @@ http {
 events {}
 ```
 
+# Redirects
+
+Podemos redirecionar requests de  **/objects** para **/fruits**:
+
+```nginx
+http {
+        server {
+                listen 8080;
+                root /tmp;
+
+                location /fruits { <------------------------------------------------------
+                        root /tmp;                                                       |
+                }                                                                        |
+                                                                                         |
+		location /objects {                                                      |
+			return 301 /fruits; # Redirect sendo feito para <IP>:8080/fruits -
+		}
+        }
+}
+
+events {}
+```
